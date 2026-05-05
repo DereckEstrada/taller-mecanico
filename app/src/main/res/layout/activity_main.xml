@@ -12,11 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:padding="25dp">
 
         <!-- Cabecera universitaria -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,55 +29,65 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Universidad de Guayaquil"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
                     android:textSize="14sp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
                     android:text="Facultad de Ciencias Matemáticas y Físicas"
                     android:textColor="#E0E0E0"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    android:layout_marginTop="2dp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
                     android:text="Ingeniería en Sistemas"
                     android:textColor="#E0E0E0"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    android:layout_marginTop="2dp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
                     android:text="Materia: Desarrollo de Aplicaciones Móviles"
                     android:textColor="#B0C4DE"
-                    android:textSize="11sp"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:layout_marginTop="4dp" />
+                    android:text="GRUPO #10"
+                    android:textColor="#B0C4DE"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Integrante 1 | Integrante 2 | Integrante 3"
-                    android:textColor="#90CAF9"
-                    android:textSize="11sp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:layout_marginTop="4dp" />
+                    android:text="Castro Jonathan | Estrada Dereck | Robles Juan | Soledispa Moises | Yumisaca Jonathan"
+                    android:textColor="#90CAF9"
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -84,21 +95,21 @@
         <!-- Ícono de herramienta -->
         <ImageView
             android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:src="@drawable/ic_herramienta"
+            android:layout_height="77dp"
             android:layout_marginBottom="20dp"
-            android:contentDescription="Herramienta" />
+            android:contentDescription="Herramienta"
+            android:src="@drawable/ic_herramienta" />
 
         <!-- Título del sistema -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
             android:text="SISTEMA DE GESTIÓN INTEGRAL\nPARA TALLERES MECÁNICOS"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginBottom="32dp" />
+            android:textStyle="bold" />
 
         <!-- Campo Usuario -->
         <com.google.android.material.textfield.TextInputLayout
@@ -108,20 +119,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Usuario"
-            app:startIconDrawable="@drawable/ic_person"
-            app:startIconTint="#FFFFFF"
-            app:boxStrokeColor="#e94560"
-            app:hintTextColor="#FFFFFF"
             app:boxBackgroundColor="#33FFFFFF"
-            app:errorTextColor="#FF6B6B">
+            app:boxStrokeColor="#e94560"
+            app:errorTextColor="#FF6B6B"
+            app:hintTextColor="#FFFFFF"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconTint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:imeOptions="actionNext" />
+                android:textColor="#FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,22 +144,22 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
             android:hint="Contraseña"
-            app:startIconDrawable="@drawable/ic_lock"
-            app:startIconTint="#FFFFFF"
+            app:boxBackgroundColor="#33FFFFFF"
+            app:boxStrokeColor="#e94560"
             app:endIconMode="password_toggle"
             app:endIconTint="#FFFFFF"
-            app:boxStrokeColor="#e94560"
+            app:errorTextColor="#FF6B6B"
             app:hintTextColor="#FFFFFF"
-            app:boxBackgroundColor="#33FFFFFF"
-            app:errorTextColor="#FF6B6B">
+            app:startIconDrawable="@drawable/ic_lock"
+            app:startIconTint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"
-                android:textColor="#FFFFFF"
-                android:imeOptions="actionDone" />
+                android:textColor="#FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,12 +168,25 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#e94560"
             android:text="INICIAR SESIÓN"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:backgroundTint="#e94560"
+            android:textStyle="bold"
+            app:cornerRadius="28dp" />
+
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
             android:layout_marginBottom="32dp"
+            android:backgroundTint="#2196F3"
+            android:onClick="registrarse"
+            android:text="REGISTRATE AQUI!"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:cornerRadius="28dp" />
 
     </LinearLayout>
