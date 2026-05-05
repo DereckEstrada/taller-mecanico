@@ -152,6 +152,18 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Checkbox Mantener Sesión -->
+        <CheckBox
+            android:id="@+id/cbMantenerSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="20dp"
+            android:text="Mantener sesión activa"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:buttonTint="#e94560" />
+
         <!-- Botón Iniciar Sesión -->
         <Button
             android:id="@+id/btnLogin"
