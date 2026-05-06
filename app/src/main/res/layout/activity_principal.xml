@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="325dp"
-        android:layout_height="701dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
@@ -298,28 +298,45 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:gravity="bottom|center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnRegistrar"
-                android:layout_width="139dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:backgroundTint="#8BC34A"
                 android:onClick="registrar"
-                android:text="Registrarse" />
+                android:text="Registrarse"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnBorrar"
-                android:layout_width="132dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:onClick="borrar"
-                android:text="Borrar" />
+                android:text="Borrar"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnVerDatos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:backgroundTint="#FF9800"
+                android:onClick="verDatos"
+                android:text="Ver Datos"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <Button
@@ -328,6 +345,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
+            android:layout_marginTop="6dp"
             android:backgroundTint="#03A9F4"
             android:onClick="regresar"
             android:text="Regresar" />

@@ -16,12 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class principalActivity extends AppCompatActivity {
+
+    private static final String ARCHIVO_REGISTROS = "registros.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +53,9 @@ public class principalActivity extends AppCompatActivity {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                // +1 because January is zero
                 final String selectedDate = day + "/" + (month + 1) + "/" + year;
                 etPlannedDate.setText(selectedDate);
-                calcularYMostrarEdad(year,month,day);
+                calcularYMostrarEdad(year, month, day);
             }
         });
 
@@ -99,8 +107,6 @@ public class principalActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String nacionalidadSeleccionada = parent.getItemAtPosition(position).toString();
-
             }
 
             @Override
@@ -119,8 +125,6 @@ public class principalActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String generoSeleccionado = parent.getItemAtPosition(position).toString();
-
             }
 
             @Override
@@ -129,16 +133,13 @@ public class principalActivity extends AppCompatActivity {
         });
     }
 
-    public void regresar(View view){
+    public void regresar(View view) {
         finish();
     }
 
-    // metodo para registrar e imprimir en Logs
     public void registrar(View view) {
-
-        //Verificar campos
         if (!validarCampos()) return;
-        // Elementos visuales
+
         EditText etCedula = findViewById(R.id.etCedula);
         EditText etNombres = findViewById(R.id.etNombres);
         EditText etApellidos = findViewById(R.id.etApellidos);
@@ -152,25 +153,34 @@ public class principalActivity extends AppCompatActivity {
         RadioButton rdbCasado = findViewById(R.id.btnCasado);
         RadioButton rdbDivorciado = findViewById(R.id.btnDivorciado);
 
-        // Extraer el texto de los campos
         String cedula = etCedula.getText().toString();
         String nombres = etNombres.getText().toString();
         String apellidos = etApellidos.getText().toString();
         String fecha = etFecha.getText().toString();
         String edad = etEdad.getText().toString();
-
-        // Extraer el nacionalidad, genero y nivel de ingles
-        String genero = cbGenero.getSelectedItem() != null ? cbGenero.getSelectedItem().toString() : "Vacio";
-        String nacionalidad = cbNacionalidad.getSelectedItem() != null ? cbNacionalidad.getSelectedItem().toString() : "Vacio";
+        String genero = cbGenero.getSelectedItem() != null ? cbGenero.getSelectedItem().toString() : "Vacío";
+        String nacionalidad = cbNacionalidad.getSelectedItem() != null ? cbNacionalidad.getSelectedItem().toString() : "Vacío";
         float valorEstrellas = miRatingBar.getRating();
 
-        // Determinar Estado Civil está seleccionado
         String estadoCivil = "No seleccionado";
         if (rdbSoltero.isChecked()) estadoCivil = "Soltero";
         else if (rdbCasado.isChecked()) estadoCivil = "Casado";
         else if (rdbDivorciado.isChecked()) estadoCivil = "Divorciado";
-        Toast.makeText(this, "Usuario Registrado", Toast.LENGTH_LONG).show();
-        // Imprimir en logs
+
+        // Guardar en archivo interno, campos separados por ;
+        String linea = cedula + ";" + nombres + ";" + apellidos + ";" + fecha + ";" +
+                edad + ";" + nacionalidad + ";" + genero + ";" + estadoCivil + ";" + valorEstrellas + "\n";
+
+        try {
+            FileOutputStream fos = openFileOutput(ARCHIVO_REGISTROS, MODE_APPEND);
+            fos.write(linea.getBytes());
+            fos.close();
+            Toast.makeText(this, "Usuario Registrado", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Log.e("TallerMecanico", "Error al guardar en archivo: " + e.getMessage());
+            Toast.makeText(this, "Error al guardar los datos", Toast.LENGTH_SHORT).show();
+        }
+
         Log.d("TallerMecanico", "=== NUEVO REGISTRO ===");
         Log.d("TallerMecanico", "Cédula: " + cedula);
         Log.d("TallerMecanico", "Nombres: " + nombres);
@@ -180,14 +190,52 @@ public class principalActivity extends AppCompatActivity {
         Log.d("TallerMecanico", "Género: " + genero);
         Log.d("TallerMecanico", "Nacionalidad: " + nacionalidad);
         Log.d("TallerMecanico", "Estado Civil: " + estadoCivil);
-        Log.d("TallerMecanico", "Nivel Ingles: " + valorEstrellas);
+        Log.d("TallerMecanico", "Nivel Inglés: " + valorEstrellas);
 
         borrar(view);
     }
 
-    /*
-    Metodo que borra el formaulario
-     */
+    public void verDatos(View view) {
+        StringBuilder contenido = new StringBuilder();
+
+        try {
+            InputStream is = openFileInput(ARCHIVO_REGISTROS);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String linea;
+            int numero = 1;
+
+            while ((linea = br.readLine()) != null) {
+                String[] campos = linea.split(";");
+                if (campos.length >= 9) {
+                    contenido.append("── Registro #").append(numero).append(" ──\n");
+                    contenido.append("Cédula:       ").append(campos[0]).append("\n");
+                    contenido.append("Nombres:      ").append(campos[1]).append("\n");
+                    contenido.append("Apellidos:    ").append(campos[2]).append("\n");
+                    contenido.append("Fecha Nac.:   ").append(campos[3]).append("\n");
+                    contenido.append("Edad:         ").append(campos[4]).append("\n");
+                    contenido.append("Nacionalidad: ").append(campos[5]).append("\n");
+                    contenido.append("Género:       ").append(campos[6]).append("\n");
+                    contenido.append("Estado Civil: ").append(campos[7]).append("\n");
+                    contenido.append("Nivel Inglés: ").append(campos[8]).append(" ★\n\n");
+                    numero++;
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            contenido.append("No hay registros guardados aún.");
+        }
+
+        if (contenido.length() == 0) {
+            contenido.append("No hay registros guardados aún.");
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Registros Guardados")
+                .setMessage(contenido.toString())
+                .setPositiveButton("Cerrar", null)
+                .show();
+    }
+
     public void borrar(View view) {
         ((EditText) findViewById(R.id.etCedula)).setText("");
         ((EditText) findViewById(R.id.etNombres)).setText("");
@@ -205,9 +253,6 @@ public class principalActivity extends AppCompatActivity {
         miRatingBar.setRating(0.0f);
     }
 
-    /*
-     valida campos vacios
-     */
     private boolean validarCampos() {
         boolean esValido = true;
 
