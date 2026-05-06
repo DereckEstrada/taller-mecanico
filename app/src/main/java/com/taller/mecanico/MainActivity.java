@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.taller.mecanico.databinding.ActivityMainBinding;
+
+import java.security.Principal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private void intentarLogin() {
         binding.tilUsuario.setError(null);
         binding.tilPassword.setError(null);
-
         String usuario = binding.etUsuario.getText() != null
                 ? binding.etUsuario.getText().toString().trim() : "";
         String password = binding.etPassword.getText() != null
@@ -58,12 +60,10 @@ public class MainActivity extends AppCompatActivity {
             binding.tilUsuario.setError("El usuario es requerido");
             valido = false;
         }
-
         if (password.isEmpty()) {
             binding.tilPassword.setError("La contraseña es requerida");
             valido = false;
         }
-
         if (!valido) return;
 
         if (usuario.equals(USUARIO_CORRECTO) && password.equals(PASSWORD_CORRECTA)) {
@@ -92,5 +92,10 @@ public class MainActivity extends AppCompatActivity {
         if (imm != null && getCurrentFocus() != null) {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
+    }
+
+    public void registrarse(View view){
+        Intent intentPagPrincipal = new Intent(this, principalActivity.class);
+        startActivity(intentPagPrincipal);
     }
 }
