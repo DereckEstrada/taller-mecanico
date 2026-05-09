@@ -1,12 +1,16 @@
 package com.taller.mecanico;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -43,8 +48,53 @@ public class principalActivity extends AppCompatActivity {
             return insets;
         });
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         cargarNacionalidad();
         cargarGenero();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_inicio) {
+            finish();
+            return true;
+        } else if (id == R.id.action_registros) {
+            Toast.makeText(this, "Ya estás en Registros", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_acerca_de) {
+            mostrarAcercaDe();
+            return true;
+        } else if (id == R.id.action_cerrar_sesion) {
+            getSharedPreferences(MainActivity.PREFS_NAME, MODE_PRIVATE).edit().clear().apply();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void mostrarAcercaDe() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_acerca_de);
+        dialog.getWindow().setLayout(
+                (int) (getResources().getDisplayMetrics().widthPixels * 0.92),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.findViewById(R.id.btnCerrarAcercaDe).setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 
     public void showDatePickerDialog(View v) {
@@ -167,7 +217,6 @@ public class principalActivity extends AppCompatActivity {
         else if (rdbCasado.isChecked()) estadoCivil = "Casado";
         else if (rdbDivorciado.isChecked()) estadoCivil = "Divorciado";
 
-        // Guardar en archivo interno, campos separados por ;
         String linea = cedula + ";" + nombres + ";" + apellidos + ";" + fecha + ";" +
                 edad + ";" + nacionalidad + ";" + genero + ";" + estadoCivil + ";" + valorEstrellas + "\n";
 
