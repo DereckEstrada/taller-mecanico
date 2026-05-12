@@ -17,4 +17,23 @@
         <item>Masculino</item>
         <item>Prefiero no decirlo</item>
     </string-array>
+
+    <string-array name="lista_tipos_servicio">
+        <item>Seleccione</item>
+        <item>Cambio de aceite</item>
+        <item>Revisión de frenos</item>
+        <item>Alineación y balanceo</item>
+        <item>Cambio de llantas</item>
+        <item>Revisión eléctrica</item>
+        <item>Cambio de batería</item>
+        <item>Revisión general</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="lista_estados_servicio">
+        <item>Pendiente</item>
+        <item>En progreso</item>
+        <item>Completado</item>
+        <item>Cancelado</item>
+    </string-array>
 </resources>

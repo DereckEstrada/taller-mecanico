@@ -31,6 +31,10 @@
         <activity
             android:name=".ConsultaActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ServiciosActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

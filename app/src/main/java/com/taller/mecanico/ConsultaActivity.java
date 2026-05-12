@@ -275,6 +275,9 @@ public class ConsultaActivity extends AppCompatActivity {
         } else if (id == R.id.action_consulta) {
             Toast.makeText(this, "Ya estás en Consulta", Toast.LENGTH_SHORT).show();
             return true;
+        } else if (id == R.id.action_servicios) {
+            startActivity(new Intent(this, ServiciosActivity.class));
+            return true;
         } else if (id == R.id.action_acerca_de) {
             mostrarAcercaDe();
             return true;
