@@ -27,6 +27,10 @@
         <activity
             android:name=".PantallaActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ConsultaActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

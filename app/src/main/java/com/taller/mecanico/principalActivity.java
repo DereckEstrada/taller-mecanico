@@ -71,6 +71,9 @@ public class principalActivity extends AppCompatActivity {
         } else if (id == R.id.action_registros) {
             Toast.makeText(this, "Ya estás en Registros", Toast.LENGTH_SHORT).show();
             return true;
+        } else if (id == R.id.action_consulta) {
+            startActivity(new Intent(this, ConsultaActivity.class));
+            return true;
         } else if (id == R.id.action_acerca_de) {
             mostrarAcercaDe();
             return true;
@@ -224,10 +227,18 @@ public class principalActivity extends AppCompatActivity {
             FileOutputStream fos = openFileOutput(ARCHIVO_REGISTROS, MODE_APPEND);
             fos.write(linea.getBytes());
             fos.close();
-            Toast.makeText(this, "Usuario Registrado", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             Log.e("TallerMecanico", "Error al guardar en archivo: " + e.getMessage());
-            Toast.makeText(this, "Error al guardar los datos", Toast.LENGTH_SHORT).show();
+        }
+
+        // Guardar también en SQLite
+        try {
+            DatabaseHelper db = new DatabaseHelper(this);
+            db.insertarUsuario(cedula, nombres, apellidos, fecha, edad, nacionalidad, genero, estadoCivil, valorEstrellas);
+            Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.e("TallerMecanico", "Error al guardar en SQLite: " + e.getMessage());
+            Toast.makeText(this, "Error: la cédula ya existe en la base de datos", Toast.LENGTH_LONG).show();
         }
 
         Log.d("TallerMecanico", "=== NUEVO REGISTRO ===");
