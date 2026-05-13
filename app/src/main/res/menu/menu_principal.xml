@@ -26,5 +26,8 @@
         android:id="@+id/action_cerrar_sesion"
         android:title="Cerrar Sesión"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/id_registrarclientes"
+        android:title="Registrar cliente" />
 
 </menu>

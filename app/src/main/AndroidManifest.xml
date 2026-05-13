@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mecanico">
         <activity
+            android:name=".RegistrarClientesActivity"
+            android:exported="false" />
+        <activity
             android:name=".principalActivity"
             android:exported="false" />
         <activity
@@ -23,11 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".PantallaActivity"
             android:exported="false" />
-
         <activity
             android:name=".ConsultaActivity"
             android:exported="false" />
