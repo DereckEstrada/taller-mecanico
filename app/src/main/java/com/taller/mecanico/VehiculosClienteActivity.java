@@ -1,16 +1,21 @@
 package com.taller.mecanico;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButton;
 import com.taller.mecanico.data.DBHelper;
 
 import java.util.ArrayList;
@@ -21,11 +26,9 @@ public class VehiculosClienteActivity extends AppCompatActivity {
     // VARIABLES
     // =========================
 
-    TextView txtNombreCliente;
-
     ListView listaVehiculos;
 
-    MaterialButton btnNuevoVehiculo;
+    EditText txtBuscarVehiculo;
 
     MaterialToolbar toolbar;
 
@@ -33,11 +36,11 @@ public class VehiculosClienteActivity extends AppCompatActivity {
 
     ArrayList<String> lista;
 
+    ArrayList<Integer> listaIds;
+
     ArrayAdapter<String> adapter;
 
     int clienteId;
-
-    String nombreCliente;
 
     // =========================
     // ON CREATE
@@ -56,7 +59,9 @@ public class VehiculosClienteActivity extends AppCompatActivity {
         // =========================
 
         toolbar =
-                findViewById(R.id.toolbarVehiculos);
+                findViewById(
+                        R.id.toolbarVehiculos
+                );
 
         setSupportActionBar(toolbar);
 
@@ -73,20 +78,25 @@ public class VehiculosClienteActivity extends AppCompatActivity {
         // COMPONENTES
         // =========================
 
-        txtNombreCliente =
-                findViewById(R.id.txtNombreCliente);
-
         listaVehiculos =
-                findViewById(R.id.listaVehiculos);
+                findViewById(
+                        R.id.listaVehiculos
+                );
 
-        btnNuevoVehiculo =
-                findViewById(R.id.btnNuevoVehiculo);
+        txtBuscarVehiculo =
+                findViewById(
+                        R.id.txtBuscarVehiculo
+                );
+
+        // =========================
+        // DB
+        // =========================
 
         dbHelper =
                 new DBHelper(this);
 
         // =========================
-        // DATOS CLIENTE
+        // CLIENTE ID
         // =========================
 
         clienteId =
@@ -95,107 +105,207 @@ public class VehiculosClienteActivity extends AppCompatActivity {
                         0
                 );
 
-        nombreCliente =
-                getIntent().getStringExtra(
-                        "nombre_cliente"
-                );
-
-        txtNombreCliente.setText(nombreCliente);
-
         // =========================
         // CARGAR VEHICULOS
         // =========================
 
-        cargarVehiculos();
+        cargarVehiculos("");
 
         // =========================
-        // NUEVO VEHICULO
+        // BUSCADOR
         // =========================
 
-        btnNuevoVehiculo.setOnClickListener(v -> {
+        txtBuscarVehiculo
+                .addTextChangedListener(
 
-            Intent intent =
-                    new Intent(
-                            this,
-                            RegistrarVehiculoActivity.class
+                        new TextWatcher() {
+
+                            @Override
+                            public void beforeTextChanged(
+                                    CharSequence s,
+                                    int start,
+                                    int count,
+                                    int after
+                            ) {
+                            }
+
+                            @Override
+                            public void onTextChanged(
+                                    CharSequence s,
+                                    int start,
+                                    int before,
+                                    int count
+                            ) {
+
+                                cargarVehiculos(
+                                        s.toString()
+                                );
+                            }
+
+                            @Override
+                            public void afterTextChanged(
+                                    Editable s
+                            ) {
+                            }
+                        }
+                );
+
+        // =========================
+        // CLICK VEHICULO
+        // =========================
+
+        listaVehiculos
+                .setOnItemClickListener(
+
+                        new AdapterView
+                                .OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(
+                                    AdapterView<?> parent,
+                                    android.view.View view,
+                                    int position,
+                                    long id
+                            ) {
+
+                                mostrarOpciones(
+                                        position
+                                );
+                            }
+                        }
+                );
+
+        // =========================
+        // BOTON NUEVO VEHICULO
+        // =========================
+
+        findViewById(R.id.btnNuevoVehiculo)
+                .setOnClickListener(v -> {
+
+                    Intent intent =
+                            new Intent(
+
+                                    this,
+
+                                    RegistrarVehiculoActivity.class
+                            );
+
+                    intent.putExtra(
+                            "cliente_id",
+                            clienteId
                     );
 
-            intent.putExtra(
-                    "cliente_id",
-                    clienteId
-            );
-
-            startActivity(intent);
-        });
-    }
-
-    // =========================
-    // ON RESUME
-    // =========================
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        cargarVehiculos();
+                    startActivity(intent);
+                });
     }
 
     // =========================
     // CARGAR VEHICULOS
     // =========================
 
-    private void cargarVehiculos() {
+    private void cargarVehiculos(
+            String filtro
+    ) {
 
         lista =
                 new ArrayList<>();
 
+        listaIds =
+                new ArrayList<>();
+
+        SQLiteDatabase db =
+                dbHelper.getReadableDatabase();
+
         Cursor cursor =
-                dbHelper.obtenerVehiculosCliente(
-                        clienteId
+                db.rawQuery(
+
+                        "SELECT * FROM vehiculo " +
+                                "WHERE cliente_id=? " +
+                                "AND (" +
+                                "marca LIKE ? " +
+                                "OR modelo LIKE ? " +
+                                "OR placa LIKE ?" +
+                                ")",
+
+                        new String[]{
+
+                                String.valueOf(
+                                        clienteId
+                                ),
+
+                                "%" + filtro + "%",
+
+                                "%" + filtro + "%",
+
+                                "%" + filtro + "%"
+                        }
                 );
 
         if (cursor.moveToFirst()) {
 
             do {
 
+                int id =
+
+                        cursor.getInt(
+
+                                cursor.getColumnIndexOrThrow(
+                                        "id"
+                                )
+                        );
+
                 String placa =
+
                         cursor.getString(
+
                                 cursor.getColumnIndexOrThrow(
                                         "placa"
                                 )
                         );
 
                 String marca =
+
                         cursor.getString(
+
                                 cursor.getColumnIndexOrThrow(
                                         "marca"
                                 )
                         );
 
                 String modelo =
+
                         cursor.getString(
+
                                 cursor.getColumnIndexOrThrow(
                                         "modelo"
                                 )
                         );
 
                 String color =
+
                         cursor.getString(
+
                                 cursor.getColumnIndexOrThrow(
                                         "color"
                                 )
                         );
 
                 String anio =
+
                         cursor.getString(
+
                                 cursor.getColumnIndexOrThrow(
                                         "anio"
                                 )
                         );
 
+                listaIds.add(id);
+
                 lista.add(
 
-                        marca + " " + modelo +
+                        "Marca: " + marca +
+
+                                "\nModelo: " + modelo +
 
                                 "\nPlaca: " + placa +
 
@@ -225,6 +335,125 @@ public class VehiculosClienteActivity extends AppCompatActivity {
     }
 
     // =========================
+    // OPCIONES
+    // =========================
+
+    private void mostrarOpciones(
+            int position
+    ) {
+
+        int idVehiculo =
+                listaIds.get(position);
+
+        String[] opciones = {
+
+                "Editar",
+
+                "Eliminar"
+        };
+
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this);
+
+        builder.setTitle(
+                "Seleccione una opción"
+        );
+
+        builder.setItems(opciones,
+                (dialog, which) -> {
+
+                    // =========================
+                    // EDITAR
+                    // =========================
+
+                    if (which == 0) {
+
+                        Intent intent =
+                                new Intent(
+
+                                        this,
+
+                                        EditarVehiculoActivity.class
+                                );
+
+                        intent.putExtra(
+                                "vehiculo_id",
+                                idVehiculo
+                        );
+
+                        startActivity(intent);
+                    }
+
+                    // =========================
+                    // ELIMINAR
+                    // =========================
+
+                    else if (which == 1) {
+
+                        eliminarVehiculo(
+                                idVehiculo
+                        );
+                    }
+                });
+
+        builder.show();
+    }
+
+    // =========================
+    // ELIMINAR VEHICULO
+    // =========================
+
+    private void eliminarVehiculo(
+            int id
+    ) {
+
+        SQLiteDatabase db =
+                dbHelper.getWritableDatabase();
+
+        int resultado =
+                db.delete(
+
+                        "vehiculo",
+
+                        "id=?",
+
+                        new String[]{
+                                String.valueOf(id)
+                        }
+                );
+
+        if (resultado > 0) {
+
+            Toast.makeText(
+
+                    this,
+
+                    "Vehículo eliminado correctamente",
+
+                    Toast.LENGTH_SHORT
+
+            ).show();
+
+            cargarVehiculos("");
+        }
+
+        else {
+
+            Toast.makeText(
+
+                    this,
+
+                    "Error al eliminar",
+
+                    Toast.LENGTH_SHORT
+
+            ).show();
+        }
+
+        db.close();
+    }
+
+    // =========================
     // TOOLBAR ATRAS
     // =========================
 
@@ -234,5 +463,20 @@ public class VehiculosClienteActivity extends AppCompatActivity {
         finish();
 
         return true;
+    }
+
+    // =========================
+    // RECARGAR
+    // =========================
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        cargarVehiculos(
+                txtBuscarVehiculo
+                        .getText()
+                        .toString()
+        );
     }
 }

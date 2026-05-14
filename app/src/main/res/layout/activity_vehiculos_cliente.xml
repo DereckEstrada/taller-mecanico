@@ -19,50 +19,45 @@
         android:background="#102542"
         app:title="Vehículos del Cliente"
         app:titleCentered="true"
-        app:titleTextColor="#FFFFFF"/>
+        app:titleTextColor="#FFFFFF" />
 
     <!-- ========================= -->
-    <!-- NOMBRE CLIENTE -->
-    <!-- ========================= -->
-
-    <TextView
-        android:id="@+id/txtNombreCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Cliente"
-        android:textColor="#102542"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
-    <!-- ========================= -->
-    <!-- BOTÓN AGREGAR -->
+    <!-- BOTON AGREGAR -->
     <!-- ========================= -->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNuevoVehiculo"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         android:backgroundTint="#102542"
         android:text="AGREGAR VEHÍCULO"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:cornerRadius="14dp"/>
+        app:cornerRadius="14dp" />
 
     <!-- ========================= -->
-    <!-- LISTA -->
+    <!-- BUSCADOR -->
+    <!-- ========================= -->
+
+    <EditText
+        android:id="@+id/txtBuscarVehiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="Buscar por marca, modelo o placa"
+        android:padding="12dp" />
+
+    <!-- ========================= -->
+    <!-- LISTVIEW -->
     <!-- ========================= -->
 
     <ListView
         android:id="@+id/listaVehiculos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="12dp"
-        android:dividerHeight="10dp"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

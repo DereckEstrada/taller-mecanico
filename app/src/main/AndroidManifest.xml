@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mecanico">
         <activity
+            android:name=".EditarVehiculoActivity"
+            android:exported="false" />
+        <activity
             android:name=".VehiculosClienteActivity"
             android:exported="false" />
         <activity

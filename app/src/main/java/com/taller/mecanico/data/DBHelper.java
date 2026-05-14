@@ -183,4 +183,87 @@ public class DBHelper extends SQLiteOpenHelper {
                 }
         );
     }
+
+    // =========================
+// ELIMINAR VEHICULO
+// =========================
+
+    public void eliminarVehiculo(int id) {
+
+        SQLiteDatabase db =
+                this.getWritableDatabase();
+
+        db.delete(
+
+                "vehiculo",
+
+                "id=?",
+
+                new String[]{
+                        String.valueOf(id)
+                }
+        );
+
+        db.close();
+    }
+
+    // =========================
+// OBTENER VEHICULO POR ID
+// =========================
+
+    public Cursor obtenerVehiculoPorId(int id) {
+
+        SQLiteDatabase db =
+                this.getReadableDatabase();
+
+        return db.rawQuery(
+
+                "SELECT * FROM vehiculo WHERE id=?",
+
+                new String[]{
+                        String.valueOf(id)
+                }
+        );
+    }
+
+// =========================
+// ACTUALIZAR VEHICULO
+// =========================
+
+    public void actualizarVehiculo(
+            int id,
+            String placa,
+            String marca,
+            String modelo,
+            String color,
+            String anio
+    ) {
+
+        SQLiteDatabase db =
+                this.getWritableDatabase();
+
+        android.content.ContentValues cv =
+                new android.content.ContentValues();
+
+        cv.put("placa", placa);
+        cv.put("marca", marca);
+        cv.put("modelo", modelo);
+        cv.put("color", color);
+        cv.put("anio", anio);
+
+        db.update(
+
+                "vehiculo",
+
+                cv,
+
+                "id=?",
+
+                new String[]{
+                        String.valueOf(id)
+                }
+        );
+
+        db.close();
+    }
 }
