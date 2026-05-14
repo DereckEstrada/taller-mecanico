@@ -38,14 +38,14 @@ public class Reparacion {
     public void setCosto(double v) { this.costo = v; }
 
     // JOIN
-    public String getNombreCliente()      { return nombreCliente; }
-    public void   setNombreCliente(String v)    { this.nombreCliente = v; }
-    public String getNombreTecnico()      { return nombreTecnico; }
-    public void   setNombreTecnico(String v)    { this.nombreTecnico = v; }
-    public String getPlacaVehiculo()      { return placaVehiculo; }
-    public void   setPlacaVehiculo(String v)    { this.placaVehiculo = v; }
-    public String getInfoVehiculo()       { return infoVehiculo; }
-    public void   setInfoVehiculo(String v)     { this.infoVehiculo = v; }
+    public String getNombreCliente()      { return cliente.getNombreCompleto(); }
+    public void   setNombreCliente(String v)    { this.cliente.setNombre(v); }
+    public String getNombreTecnico()      { return tecnico.getNombreCompleto(); }
+    public void   setNombreTecnico(String v)    { this.tecnico.setNombre(v); }
+    public String getPlacaVehiculo()      { return vehiculo.getPlaca(); }
+    public void   setPlacaVehiculo(String v)    { this.vehiculo.setPlaca(v); }
+    public String getInfoVehiculo()       { return vehiculo.getDescripcion(); }
+    //public void   setInfoVehiculo(String v)     {  = v; }
 
     /** Etiqueta legible del estado para la UI */
     public String getEstadoLabel() {
