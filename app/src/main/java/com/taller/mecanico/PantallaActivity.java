@@ -57,6 +57,12 @@ public class PantallaActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.id_listadoclientes) {
+            startActivity(new Intent(this,ListaClientesActivity.class));
+            return true;
+        }
+
+
         if (id == R.id.action_consulta) {
             startActivity(new Intent(this, ConsultaActivity.class));
             return true;

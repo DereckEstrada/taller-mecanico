@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- ========================= -->
+    <!-- TOOLBAR -->
+    <!-- ========================= -->
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarListaClientes"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#102542"
+        app:title="Lista de Clientes"
+        app:titleCentered="true"
+        app:titleTextColor="#FFFFFF" />
+
+    <!-- ========================= -->
+    <!-- BUSCADOR -->
+    <!-- ========================= -->
+
+    <EditText
+        android:id="@+id/txtBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="Buscar por nombre o cédula"
+        android:padding="12dp" />
+
+    <!-- ========================= -->
+    <!-- LISTVIEW -->
+    <!-- ========================= -->
+
+    <ListView
+        android:id="@+id/listaClientes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- ========================= -->
+    <!-- TOOLBAR -->
+    <!-- ========================= -->
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarVehiculos"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#102542"
+        app:title="Vehículos del Cliente"
+        app:titleCentered="true"
+        app:titleTextColor="#FFFFFF"/>
+
+    <!-- ========================= -->
+    <!-- NOMBRE CLIENTE -->
+    <!-- ========================= -->
+
+    <TextView
+        android:id="@+id/txtNombreCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Cliente"
+        android:textColor="#102542"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <!-- ========================= -->
+    <!-- BOTÓN AGREGAR -->
+    <!-- ========================= -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNuevoVehiculo"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#102542"
+        android:text="AGREGAR VEHÍCULO"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:cornerRadius="14dp"/>
+
+    <!-- ========================= -->
+    <!-- LISTA -->
+    <!-- ========================= -->
+
+    <ListView
+        android:id="@+id/listaVehiculos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        android:dividerHeight="10dp"/>
+
+</LinearLayout>

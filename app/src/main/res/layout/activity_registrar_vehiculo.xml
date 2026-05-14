@@ -7,31 +7,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_login"
-    tools:context=".RegistrarClientesActivity">
+    tools:context=".RegistrarVehiculoActivity">
 
-    <!-- ========================= -->
     <!-- TOOLBAR -->
-    <!-- ========================= -->
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbarRegistroCliente"
+        android:id="@+id/toolbarVehiculo"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#102542"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Registro de Cliente"
+        app:title="Registrar Vehículo"
         app:titleCentered="true"
         app:titleTextColor="#FFFFFF" />
 
-    <!-- ========================= -->
     <!-- SCROLL -->
-    <!-- ========================= -->
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/toolbarRegistroCliente"
+        app:layout_constraintTop_toBottomOf="@id/toolbarVehiculo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -42,9 +38,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- ========================= -->
             <!-- CONTENEDOR -->
-            <!-- ========================= -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,10 +50,10 @@
                 <!-- ICONO -->
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_person"
+                    android:src="@drawable/ic_car"
                     app:tint="#102542" />
 
                 <!-- TITULO -->
@@ -69,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
-                    android:text="Nuevo Cliente"
+                    android:text="Nuevo Vehículo"
                     android:textColor="#102542"
                     android:textSize="28sp"
                     android:textStyle="bold" />
@@ -79,19 +73,17 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="24dp"
-                    android:text="Complete la información del cliente"
+                    android:text="Ingrese la información del vehículo"
                     android:textColor="#555555"
                     android:textSize="14sp" />
 
-                <!-- ========================= -->
-                <!-- CEDULA -->
-                <!-- ========================= -->
+                <!-- PLACA -->
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Cédula"
+                    android:hint="Placa"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
                     app:boxCornerRadiusTopEnd="14dp"
@@ -99,137 +91,108 @@
                     app:boxStrokeColor="#102542">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtCedula"
+                        android:id="@+id/txtPlaca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="8"
+                        android:inputType="textCapCharacters"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- MARCA -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:hint="Marca"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="#102542">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtMarca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- MODELO -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:hint="Modelo"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="#102542">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtModelo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- COLOR -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:hint="Color"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="#102542">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- AÑO -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:hint="Año"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="#102542">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtAnio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:maxLength="10" />
+                        android:maxLength="4"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ========================= -->
-                <!-- NOMBRE -->
-                <!-- ========================= -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:hint="Nombre completo"
-                    app:boxCornerRadiusBottomEnd="14dp"
-                    app:boxCornerRadiusBottomStart="14dp"
-                    app:boxCornerRadiusTopEnd="14dp"
-                    app:boxCornerRadiusTopStart="14dp"
-                    app:boxStrokeColor="#102542">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtNombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- ========================= -->
-                <!-- TELEFONO -->
-                <!-- ========================= -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:hint="Teléfono"
-                    app:boxCornerRadiusBottomEnd="14dp"
-                    app:boxCornerRadiusBottomStart="14dp"
-                    app:boxCornerRadiusTopEnd="14dp"
-                    app:boxCornerRadiusTopStart="14dp"
-                    app:boxStrokeColor="#102542">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtTelefono"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="10" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- ========================= -->
-                <!-- CORREO -->
-                <!-- ========================= -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:hint="Correo electrónico"
-                    app:boxCornerRadiusBottomEnd="14dp"
-                    app:boxCornerRadiusBottomStart="14dp"
-                    app:boxCornerRadiusTopEnd="14dp"
-                    app:boxCornerRadiusTopStart="14dp"
-                    app:boxStrokeColor="#102542">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtCorreo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- ========================= -->
-                <!-- DIRECCION -->
-                <!-- ========================= -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:hint="Dirección"
-                    app:boxCornerRadiusBottomEnd="14dp"
-                    app:boxCornerRadiusBottomStart="14dp"
-                    app:boxCornerRadiusTopEnd="14dp"
-                    app:boxCornerRadiusTopStart="14dp"
-                    app:boxStrokeColor="#102542">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtDireccion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- ========================= -->
-                <!-- BOTÓN GUARDAR -->
-                <!-- ========================= -->
+                <!-- BOTÓN -->
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGuardarCliente"
+                    android:id="@+id/btnGuardarVehiculo"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="28dp"
                     android:backgroundTint="#102542"
-                    android:text="REGISTRAR CLIENTE"
+                    android:text="REGISTRAR VEHÍCULO"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:cornerRadius="14dp" />
-
-                <!-- ========================= -->
-                <!-- BOTÓN REGRESAR -->
-                <!-- ========================= -->
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRegresar"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="#757575"
-                    android:text="REGRESAR"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="14dp" />
+                    app:cornerRadius="14dp"/>
 
             </LinearLayout>
 

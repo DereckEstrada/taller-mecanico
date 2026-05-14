@@ -29,5 +29,8 @@
     <item
         android:id="@+id/id_registrarclientes"
         android:title="Registrar cliente" />
+    <item
+        android:id="@+id/id_listadoclientes"
+        android:title="Listado clientes" />
 
 </menu>

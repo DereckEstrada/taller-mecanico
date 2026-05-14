@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mecanico">
         <activity
+            android:name=".VehiculosClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarVehiculoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListaClientesActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistrarClientesActivity"
             android:exported="false" />
         <activity

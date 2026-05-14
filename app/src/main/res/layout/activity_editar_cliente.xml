@@ -7,31 +7,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_login"
-    tools:context=".RegistrarClientesActivity">
+    tools:context=".EditarClienteActivity">
 
-    <!-- ========================= -->
     <!-- TOOLBAR -->
-    <!-- ========================= -->
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbarRegistroCliente"
+        android:id="@+id/toolbarEditar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#102542"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Registro de Cliente"
+        app:title="Editar Cliente"
         app:titleCentered="true"
-        app:titleTextColor="#FFFFFF" />
+        app:titleTextColor="#FFFFFF"/>
 
-    <!-- ========================= -->
     <!-- SCROLL -->
-    <!-- ========================= -->
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/toolbarRegistroCliente"
+        app:layout_constraintTop_toBottomOf="@id/toolbarEditar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -42,9 +38,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- ========================= -->
             <!-- CONTENEDOR -->
-            <!-- ========================= -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,7 +54,7 @@
                     android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_person"
-                    app:tint="#102542" />
+                    app:tint="#102542"/>
 
                 <!-- TITULO -->
 
@@ -69,23 +63,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
-                    android:text="Nuevo Cliente"
+                    android:text="Editar Cliente"
                     android:textColor="#102542"
                     android:textSize="28sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="24dp"
-                    android:text="Complete la información del cliente"
+                    android:text="Modifique la información del cliente"
                     android:textColor="#555555"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
-                <!-- ========================= -->
                 <!-- CEDULA -->
-                <!-- ========================= -->
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -99,16 +91,14 @@
                     app:boxStrokeColor="#102542">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtCedula"
+                        android:id="@+id/txtCedulaEditar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:maxLength="10" />
+                        android:maxLength="10"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ========================= -->
                 <!-- NOMBRE -->
-                <!-- ========================= -->
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -123,15 +113,13 @@
                     app:boxStrokeColor="#102542">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtNombre"
+                        android:id="@+id/txtNombreEditar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ========================= -->
                 <!-- TELEFONO -->
-                <!-- ========================= -->
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -146,16 +134,14 @@
                     app:boxStrokeColor="#102542">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtTelefono"
+                        android:id="@+id/txtTelefonoEditar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
-                        android:maxLength="10" />
+                        android:maxLength="10"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ========================= -->
                 <!-- CORREO -->
-                <!-- ========================= -->
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -170,15 +156,13 @@
                     app:boxStrokeColor="#102542">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtCorreo"
+                        android:id="@+id/txtCorreoEditar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ========================= -->
                 <!-- DIRECCION -->
-                <!-- ========================= -->
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -193,43 +177,25 @@
                     app:boxStrokeColor="#102542">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtDireccion"
+                        android:id="@+id/txtDireccionEditar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress" />
+                        android:inputType="textPostalAddress"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ========================= -->
-                <!-- BOTÓN GUARDAR -->
-                <!-- ========================= -->
+                <!-- BOTÓN ACTUALIZAR -->
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGuardarCliente"
+                    android:id="@+id/btnActualizar"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="28dp"
                     android:backgroundTint="#102542"
-                    android:text="REGISTRAR CLIENTE"
+                    android:text="ACTUALIZAR CLIENTE"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:cornerRadius="14dp" />
-
-                <!-- ========================= -->
-                <!-- BOTÓN REGRESAR -->
-                <!-- ========================= -->
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRegresar"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="#757575"
-                    android:text="REGRESAR"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="14dp" />
+                    app:cornerRadius="14dp"/>
 
             </LinearLayout>
 
