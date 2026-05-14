@@ -59,11 +59,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  LOGIN
-    // ══════════════════════════════════════════════════════════════════════════
-
+    /**
+     * Login de nuestra App
+     */
     private void intentarLogin() {
 
         // ── Limpiar errores previos ───────────────────────────────────────────
@@ -113,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  NAVEGACIÓN POR ROL
-    // ══════════════════════════════════════════════════════════════════════════
-
     /**
      * Redirige a la pantalla correcta según el rol del usuario autenticado.
      *
@@ -151,11 +144,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    // ══════════════════════════════════════════════════════════════════════════
     //  UTILIDADES
-    // ══════════════════════════════════════════════════════════════════════════
-
     private void ocultarTeclado() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null && getCurrentFocus() != null) {

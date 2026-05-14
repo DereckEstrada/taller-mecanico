@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="12dp">
+
+    <!-- Nombre completo -->
+    <TextView
+        android:id="@+id/tvNombreCompleto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#1a3a6e"
+        android:text="Nombre Apellido" />
+
+    <!-- Cédula -->
+    <TextView
+        android:id="@+id/tvCedula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="#555555"
+        android:text="CI: 0000000000"
+        android:layout_marginTop="2dp" />
+
+    <!-- Teléfono -->
+    <TextView
+        android:id="@+id/tvTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="#555555"
+        android:text="Teléfono: 0000000000" />
+
+    <!-- Correo (opcional) -->
+    <TextView
+        android:id="@+id/tvCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#888888"
+        android:visibility="gone" />
+
+    <!-- Indicador de toque -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toca para ver opciones ›"
+        android:textSize="11sp"
+        android:textColor="#BDBDBD"
+        android:gravity="end"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>

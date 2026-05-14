@@ -8,7 +8,6 @@
     android:background="#F0F2F5"
     tools:context=".HomeActivity">
 
-    <!-- ── AppBar con Toolbar ──────────────────────────────────────────────── -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -34,9 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginBottom="56dp" /> <!--  marginBottom = altura del BottomNavigationView para que no tape el contenido -->
+        android:layout_marginBottom="56dp" />
 
-    <!-- ── BottomNavigationView ───────────────────────────────────────────── -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

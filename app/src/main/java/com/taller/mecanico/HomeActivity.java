@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.taller.mecanico.databinding.ActivityHomeBinding;
 import com.taller.mecanico.ui.clientes.ClientesFragment;
 import com.taller.mecanico.ui.dashboard.DashboardFragment;
@@ -35,14 +33,13 @@ public class HomeActivity extends AppCompatActivity {
     private SessionManager      session;
     private FragmentManager     fm;
 
-    // Instancias de fragmentos (se crean una vez y se reutilizan)
+    // Instancias de fragmentos
     private DashboardFragment    fragDashboard;
     private ReparacionesFragment fragReparaciones;
-    private ClientesFragment     fragClientes;
+    private ClientesFragment fragClientes;
     private TecnicoFragment     fragTecnicos;
     private RepuestosFragment    fragRepuestos;
 
-    // Fragmento activo actualmente
     private Fragment fragmentActivo;
 
     // Tag del fragmento activo (para restaurar estado al rotar pantalla)
@@ -52,11 +49,6 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG_CLIENTES     = "CLIENTES";
     private static final String TAG_TECNICOS     = "TECNICOS";
     private static final String TAG_REPUESTOS    = "REPUESTOS";
-
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  LIFECYCLE
-    // ══════════════════════════════════════════════════════════════════════════
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,10 +133,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  LISTENER DEL BOTTOM NAV
-    // ══════════════════════════════════════════════════════════════════════════
-
+    /**
+     * Método que actua de listener del menu de navegación inferior
+     */
     private void configurarListenerBottomNav() {
         binding.bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -173,11 +164,6 @@ public class HomeActivity extends AppCompatActivity {
             // Cada fragment puede implementar una interfaz ScrollToTop si se necesita
         });
     }
-
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  GESTIÓN DE FRAGMENTOS
-    // ══════════════════════════════════════════════════════════════════════════
 
     /**
      * Obtiene (o crea) la instancia del fragmento solicitado.
@@ -254,11 +240,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  MENÚ DE OPCIONES (Toolbar)
-    // ══════════════════════════════════════════════════════════════════════════
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
@@ -279,11 +260,6 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  CERRAR SESIÓN
-    // ══════════════════════════════════════════════════════════════════════════
-
     private void confirmarCerrarSesion() {
         new AlertDialog.Builder(this)
                 .setTitle("Cerrar sesión")
@@ -299,11 +275,6 @@ public class HomeActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  BOTÓN ATRÁS
-    // ══════════════════════════════════════════════════════════════════════════
 
     /**
      * Si el usuario está en el tab inicial → preguntar si desea salir de la app.

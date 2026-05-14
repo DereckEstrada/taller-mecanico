@@ -7,36 +7,11 @@
     android:background="#F0F2F5"
     android:padding="12dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
-
-        <EditText
-            android:id="@+id/etBuscar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Buscar por nombre..."
-            android:inputType="text"
-            android:padding="8dp"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:id="@+id/btnBuscar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buscar"
-            android:backgroundTint="#1a3a6e"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-
     <Button
-        android:id="@+id/btnNuevoTecnico"
+        android:id="@+id/btnNuevoVehiculo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+ Nuevo Técnico"
+        android:text="+ Agregar Vehículo"
         android:backgroundTint="#e94560"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="10dp" />
@@ -45,7 +20,7 @@
         android:id="@+id/tvVacio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay técnicos registrados."
+        android:text="Este cliente no tiene vehículos registrados."
         android:textColor="#9E9E9E"
         android:textSize="15sp"
         android:gravity="center"
@@ -53,7 +28,7 @@
         android:visibility="gone" />
 
     <ListView
-        android:id="@+id/listViewTecnicos"
+        android:id="@+id/listViewVehiculos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

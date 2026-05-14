@@ -12,6 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mecanico">
         <activity
+            android:name=".ui.tecnicos.FormTecnicoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.vehiculos.VehiculoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.clientes.FormClienteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_form_cliente"
+            android:theme="@style/Theme.Mecanico.NoActionBar" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
