@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F0F2F5">
+
+    <!-- Tabs: Repuestos / Novedades -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a3a6e">
+
+        <Button
+            android:id="@+id/btnTabRepuestos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Repuestos"
+            android:backgroundTint="#e94560"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnTabNovedades"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Novedades"
+            android:backgroundTint="#1a3a6e"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Contenedor que muestra el fragment activo -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

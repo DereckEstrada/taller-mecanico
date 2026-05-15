@@ -6,6 +6,7 @@
     android:background="#F0F2F5"
     android:padding="12dp">
 
+    <!-- Agregar novedad -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,46 +14,37 @@
         android:layout_marginBottom="8dp">
 
         <EditText
-            android:id="@+id/etBuscar"
+            android:id="@+id/etDescripcionNovedad"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Buscar repuesto..."
-            android:inputType="text"
+            android:hint="Nueva novedad o comentario..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
             android:padding="8dp"
             android:layout_marginEnd="8dp" />
 
         <Button
-            android:id="@+id/btnBuscar"
+            android:id="@+id/btnAgregarNovedad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buscar"
+            android:text="+"
             android:backgroundTint="#1a3a6e"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnNuevoRepuesto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+ Nuevo Repuesto"
-        android:backgroundTint="#e94560"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="10dp" />
-
     <TextView
-        android:id="@+id/tvVacio"
+        android:id="@+id/tvVacioNovedades"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay repuestos registrados."
+        android:text="Sin novedades registradas."
         android:textColor="#9E9E9E"
-        android:textSize="15sp"
         android:gravity="center"
-        android:padding="24dp"
+        android:padding="16dp"
         android:visibility="gone" />
 
     <ListView
-        android:id="@+id/listViewRepuestos"
+        android:id="@+id/listViewNovedades"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

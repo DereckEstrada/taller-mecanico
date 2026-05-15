@@ -15,6 +15,18 @@
             android:name=".ui.tecnicos.FormTecnicoActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.repuestos.FormRepuestoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reparaciones.FormReparacionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reparaciones.DetalleReparacionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultaVehiculoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.vehiculos.VehiculoActivity"
             android:exported="false" />
         <activity

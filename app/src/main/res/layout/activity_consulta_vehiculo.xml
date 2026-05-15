@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F0F2F5">
+
+    <!-- Barra de búsqueda -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a3a6e"
+        android:padding="12dp">
+
+        <EditText
+            android:id="@+id/etPlaca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ingrese la placa..."
+            android:inputType="textCapCharacters"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#90CAF9"
+            android:backgroundTint="#90CAF9"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar"
+            android:backgroundTint="#e94560"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Datos del vehículo -->
+            <androidx.cardview.widget.CardView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cardVehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvPlacaVehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1a3a6e" />
+
+                    <TextView
+                        android:id="@+id/tvInfoVehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#555555"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvPropietario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#555555"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Historial de reparaciones -->
+            <TextView
+                android:id="@+id/tvTituloHistorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Historial de Reparaciones"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1a3a6e"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone" />
+
+            <!-- Contenedor dinámico de reparaciones -->
+            <LinearLayout
+                android:id="@+id/containerReparaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <!-- Mensaje cuando no hay vehiculo -->
+            <TextView
+                android:id="@+id/tvMensaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingrese una placa para consultar el estado del vehículo."
+                android:textColor="#9E9E9E"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:padding="32dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
