@@ -250,7 +250,10 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_acerca_de) {
+        if (id == R.id.action_consulta_vehiculo) {
+            startActivity(new Intent(this, ConsultaVehiculoActivity.class));
+            return true;
+        } else if (id == R.id.action_acerca_de) {
             mostrarDialogoAcercaDe();
             return true;
         } else if (id == R.id.action_cerrar_sesion) {
