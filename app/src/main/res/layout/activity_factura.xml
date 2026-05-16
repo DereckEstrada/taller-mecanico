@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F2F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Encabezado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1a3a6e"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="TALLER MECÁNICO" android:textColor="#FFFFFF"
+                android:textSize="18sp" android:textStyle="bold" android:gravity="center" />
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="COMPROBANTE DE SERVICIO" android:textColor="#90CAF9"
+                android:textSize="13sp" android:gravity="center" android:layout_marginTop="2dp" />
+
+            <TextView android:id="@+id/tvNumeroFactura"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="#FFFFFF" android:textSize="13sp"
+                android:gravity="center" android:layout_marginTop="6dp" />
+        </LinearLayout>
+
+        <!-- Datos del cliente y vehículo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="DATOS DEL CLIENTE" android:textStyle="bold"
+                android:textColor="#1a3a6e" android:layout_marginBottom="6dp" />
+
+            <TextView android:id="@+id/tvFactCliente"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="14sp" android:textColor="#333333" />
+
+            <TextView android:id="@+id/tvFactVehiculo"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="13sp" android:textColor="#555555" />
+
+            <TextView android:id="@+id/tvFactTecnico"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="13sp" android:textColor="#555555" />
+
+            <TextView android:id="@+id/tvFactFecha"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="12sp" android:textColor="#888888" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Descripción del trabajo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="DESCRIPCIÓN" android:textStyle="bold"
+                android:textColor="#1a3a6e" android:layout_marginBottom="4dp" />
+
+            <TextView android:id="@+id/tvFactDescripcion"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="13sp" android:textColor="#333333" />
+        </LinearLayout>
+
+        <!-- Tabla de repuestos usados -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="REPUESTOS UTILIZADOS" android:textStyle="bold"
+                android:textColor="#1a3a6e" android:layout_marginBottom="6dp" />
+
+            <!-- Cabecera tabla -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:background="#E3F2FD" android:padding="4dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="3"
+                    android:text="Repuesto" android:textStyle="bold" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="Cant." android:textStyle="bold" android:textSize="12sp" android:gravity="center" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="Total" android:textStyle="bold" android:textSize="12sp" android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Filas dinámicas -->
+            <LinearLayout android:id="@+id/layoutRepuestosFactura"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView android:id="@+id/tvSinRepuestos"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Sin repuestos registrados" android:textColor="#9E9E9E"
+                android:textSize="13sp" android:gravity="center" android:padding="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Totales -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Mano de obra:" android:textSize="14sp" android:textColor="#555555" />
+                <TextView android:id="@+id/tvFactManoObra" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14sp" android:textColor="#333333" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Subtotal repuestos:" android:textSize="14sp" android:textColor="#555555" />
+                <TextView android:id="@+id/tvFactSubtotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14sp" android:textColor="#333333" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="IVA (15%):" android:textSize="14sp" android:textColor="#555555" />
+                <TextView android:id="@+id/tvFactIva" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14sp" android:textColor="#333333" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#1a3a6e" android:layout_marginBottom="6dp" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="TOTAL A PAGAR:" android:textSize="17sp" android:textStyle="bold" android:textColor="#1a3a6e" />
+                <TextView android:id="@+id/tvFactTotal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="17sp" android:textStyle="bold" android:textColor="#e94560" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Botón confirmar (solo modo GENERAR) -->
+        <Button android:id="@+id/btnConfirmarEntrega"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Confirmar Entrega y Facturar"
+            android:backgroundTint="#1a3a6e" android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <Button android:id="@+id/btnCancelarFactura"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="#9E9E9E" android:textColor="#FFFFFF"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

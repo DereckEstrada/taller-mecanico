@@ -12,25 +12,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mecanico">
         <activity
-            android:name=".EditarVehiculoActivity"
+            android:name=".ui.facturas.HistorialFacturasActivity"
             android:exported="false" />
         <activity
-            android:name=".VehiculosClienteActivity"
+            android:name=".ui.facturas.FacturaActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrarVehiculoActivity"
+            android:name=".ui.tecnicos.FormTecnicoActivity"
             android:exported="false" />
         <activity
-            android:name=".EditarClienteActivity"
+            android:name=".ui.repuestos.FormRepuestoActivity"
             android:exported="false" />
         <activity
-            android:name=".ListaClientesActivity"
+            android:name=".ui.reparaciones.FormReparacionActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrarClientesActivity"
+            android:name=".ui.reparaciones.DetalleReparacionActivity"
             android:exported="false" />
         <activity
-            android:name=".principalActivity"
+            android:name=".ConsultaVehiculoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.vehiculos.VehiculoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.clientes.FormClienteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_form_cliente"
+            android:theme="@style/Theme.Mecanico.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -41,12 +52,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PantallaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ConsultaActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

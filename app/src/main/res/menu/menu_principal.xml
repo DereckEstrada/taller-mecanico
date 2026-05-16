@@ -13,8 +13,8 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_consulta"
-        android:title="Consultar BD"
+        android:id="@+id/action_consulta_vehiculo"
+        android:title="Consulta por Placa"
         app:showAsAction="never" />
 
     <item

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Tab 1: Dashboard (solo ADMIN) -->
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="Inicio" />
+
+    <!-- Tab 2: Reparaciones (ADMIN y MECANICO) -->
+    <item
+        android:id="@+id/nav_reparaciones"
+        android:icon="@drawable/ic_build"
+        android:title="Reparaciones" />
+
+    <!-- Tab 3: Clientes (solo ADMIN) -->
+    <item
+        android:id="@+id/nav_clientes"
+        android:icon="@drawable/ic_people"
+        android:title="Clientes" />
+
+    <!-- Tab 4: Técnicos (solo ADMIN) -->
+    <item
+        android:id="@+id/nav_tecnicos"
+        android:icon="@drawable/ic_engineering"
+        android:title="Técnicos" />
+
+    <!-- Tab 5: Repuestos (solo ADMIN) -->
+    <item
+        android:id="@+id/nav_repuestos"
+        android:icon="@drawable/ic_inventory"
+        android:title="Repuestos" />
+
+</menu>
