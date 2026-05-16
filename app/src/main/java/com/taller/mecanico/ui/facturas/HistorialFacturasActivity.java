@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.taller.mecanico.DatePickerFragment;
 import com.taller.mecanico.R;
 import com.taller.mecanico.DTOmodel.ReparacionDTO;
 import com.taller.mecanico.database.DatabaseHelper;
@@ -97,6 +98,15 @@ public class HistorialFacturasActivity extends AppCompatActivity {
 
         etFiltroCedula.addTextChangedListener(filtroWatcher);
         etFiltroFecha.addTextChangedListener(filtroWatcher);
+
+        etFiltroCedula.addTextChangedListener(filtroWatcher);
+        etFiltroFecha.addTextChangedListener(filtroWatcher);
+
+        // Seleccion de fecha por DatePicker
+        etFiltroFecha.setFocusable(false);
+        etFiltroFecha.setClickable(true);
+
+        etFiltroFecha.setOnClickListener(v -> mostrarCalendario());
     }
 
     private void aplicarFiltros() {
@@ -183,5 +193,20 @@ public class HistorialFacturasActivity extends AppCompatActivity {
 
             return convertView;
         }
+    }
+
+    private void mostrarCalendario() {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance((view, year, month, dayOfMonth) -> {
+
+            int mesReal = month + 1;
+
+            String diaFormateado = String.format(Locale.getDefault(), "%02d", dayOfMonth);
+            String mesFormateado = String.format(Locale.getDefault(), "%02d", mesReal);
+            String fechaSeleccionada = diaFormateado + "/" + mesFormateado + "/" + year;
+
+            etFiltroFecha.setText(fechaSeleccionada);
+        });
+
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }

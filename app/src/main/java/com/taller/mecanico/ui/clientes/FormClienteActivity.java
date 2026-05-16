@@ -29,12 +29,7 @@ public class FormClienteActivity extends AppCompatActivity {
     private DatabaseHelper db;
     private int            idCliente = 0;   // 0 = modo nuevo
     private boolean        modoEdicion = false;
-
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  LIFECYCLE
-    // ══════════════════════════════════════════════════════════════════════════
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +69,6 @@ public class FormClienteActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  SETUP
-    // ══════════════════════════════════════════════════════════════════════════
-
     private void enlazarVistas() {
         tilCedula    = findViewById(R.id.tilCedula);
         tilNombre    = findViewById(R.id.tilNombre);
@@ -123,11 +112,6 @@ public class FormClienteActivity extends AppCompatActivity {
         tilCedula.setHelperText("La cédula no puede modificarse");
     }
 
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  GUARDAR
-    // ══════════════════════════════════════════════════════════════════════════
-
     private void guardar() {
         if (!validar()) return;
 
@@ -164,11 +148,6 @@ public class FormClienteActivity extends AppCompatActivity {
             }
         }
     }
-
-
-    // ══════════════════════════════════════════════════════════════════════════
-    //  VALIDACIÓN
-    // ══════════════════════════════════════════════════════════════════════════
 
     private boolean validar() {
         boolean valido = true;
