@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mecanico">
         <activity
+            android:name=".ui.facturas.HistorialFacturasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.facturas.FacturaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.tecnicos.FormTecnicoActivity"
             android:exported="false" />
         <activity

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.taller.mecanico.R;
 import com.taller.mecanico.database.DatabaseHelper;
+import com.taller.mecanico.ui.facturas.HistorialFacturasActivity;
 import com.taller.mecanico.utils.SessionManager;
 
 public class DashboardFragment extends Fragment {
@@ -29,11 +30,9 @@ public class DashboardFragment extends Fragment {
         DatabaseHelper db      = DatabaseHelper.getInstance(requireContext());
         SessionManager session = SessionManager.getInstance(requireContext());
 
-        // Saludo personalizado
         TextView tvSaludo = view.findViewById(R.id.tvSaludo);
         tvSaludo.setText("Hola, " + session.getUsername() + " 👋");
-
-        // Tarjetas de resumen — se completan en Fase 7
+        // Tarjetas de resumen
         ((TextView) view.findViewById(R.id.tvCountReparaciones))
                 .setText(String.valueOf(
                         db.contarReparacionesPorEstado(DatabaseHelper.ESTADO_REPARACION)
@@ -48,5 +47,18 @@ public class DashboardFragment extends Fragment {
 
         ((TextView) view.findViewById(R.id.tvCountStockBajo))
                 .setText(String.valueOf(db.contarRepuestosConStockBajo(5)));
+
+        // ── Nueva Lógica: Historial de Facturas ──
+        View btnHistorialFacturas = view.findViewById(R.id.btnHistorialFacturas);
+
+        if (session.esAdmin()) {
+            btnHistorialFacturas.setVisibility(View.VISIBLE);
+            btnHistorialFacturas.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(requireContext(), HistorialFacturasActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            btnHistorialFacturas.setVisibility(View.GONE);
+        }
     }
 }

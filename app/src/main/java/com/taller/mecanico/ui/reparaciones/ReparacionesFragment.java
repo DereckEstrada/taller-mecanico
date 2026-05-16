@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.taller.mecanico.R;
 import com.taller.mecanico.DTOmodel.ReparacionDTO;
 import com.taller.mecanico.database.DatabaseHelper;
+import com.taller.mecanico.ui.facturas.FacturaActivity;
 import com.taller.mecanico.utils.SessionManager;
 
 import java.util.ArrayList;
@@ -43,11 +44,11 @@ public class ReparacionesFragment extends Fragment {
 
     private static final String[] ESTADOS_FILTRO = {
             "TODOS", "EN_DIAGNOSTICO", "EN_REPARACION",
-            "ESPERANDO_REPUESTOS", "LISTO_ENTREGA", "ENTREGADO"
+            "ESPERANDO_REPUESTOS", "LISTO_ENTREGA"
     };
     private static final String[] ETIQUETAS_FILTRO = {
             "Todos", "En Diagnóstico", "En Reparación",
-            "Esperando Repuestos", "Listo para Entrega", "Entregado"
+            "Esperando Repuestos", "Listo para Entrega"
     };
 
     private final ActivityResultLauncher<Intent> launcher =
@@ -110,15 +111,22 @@ public class ReparacionesFragment extends Fragment {
                 ? db.getReparacionesByTecnico(session.getIdReferencia())
                 : db.getReparaciones();
 
+        listaReparaciones = new ArrayList<>();
+
         if ("TODOS".equals(filtroEstadoActual)) {
-            listaReparaciones = todas;
-        } else {
-            listaReparaciones = new ArrayList<>();
+            // Si el filtro es "TODOS", agregamos todos los vehículos EXCEPTO los entregados
             for (ReparacionDTO r : todas) {
-                if (filtroEstadoActual.equals(r.getEstado())) listaReparaciones.add(r);
+                if (!DatabaseHelper.ESTADO_ENTREGADO.equals(r.getEstado())) {
+                    listaReparaciones.add(r);
+                }
+            }
+        } else {
+            for (ReparacionDTO r : todas) {
+                if (filtroEstadoActual.equals(r.getEstado())) {
+                    listaReparaciones.add(r);
+                }
             }
         }
-
         adapter = new ReparacionAdapter(requireContext(), listaReparaciones);
         listView.setAdapter(adapter);
         tvVacio.setVisibility(listaReparaciones.isEmpty() ? View.VISIBLE : View.GONE);
@@ -130,6 +138,11 @@ public class ReparacionesFragment extends Fragment {
         if (session.esAdmin()) {
             opciones.add("Editar");
             opciones.add("Eliminar");
+        }
+        //Si esta listo para entregar entonces muestra Generar Factura
+        boolean esListoParaEntrega = "LISTO_ENTREGA".equals(rpa.getEstado());
+        if (esListoParaEntrega) {
+            opciones.add("Generar Factura");
         }
 
         new AlertDialog.Builder(requireContext())
@@ -145,6 +158,11 @@ public class ReparacionesFragment extends Fragment {
                         launcher.launch(intent);
                     } else if (which == 2) {
                         confirmarEliminar(rpa);
+                    }else if(which ==3){
+                        Intent intent = new Intent(requireContext(), FacturaActivity.class);
+                        intent.putExtra("id_reparacion", rpa.getIdReparacion());
+                        intent.putExtra("modo_generar", true);
+                        launcher.launch(intent);
                     }
                 })
                 .setNegativeButton("Cancelar", null)

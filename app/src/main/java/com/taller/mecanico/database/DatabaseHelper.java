@@ -5,13 +5,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.taller.mecanico.DTOmodel.ReparacionDTO;
 import com.taller.mecanico.model.Cliente;
 import com.taller.mecanico.model.Novedad;
-import com.taller.mecanico.model.Reparacion;
 import com.taller.mecanico.model.RepuestoReparacion;
 import com.taller.mecanico.model.Repuesto;
 import com.taller.mecanico.model.Tecnico;
@@ -336,8 +334,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return u;
     }
 
-
-
     //  MÓDULO: CLIENTES
     public long insertarCliente(Cliente cl) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -638,108 +634,95 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(RPA_ESTADO,      rpa.getEstado());
         cv.put(RPA_DESCRIPCION, rpa.getDescripcion());
         cv.put(RPA_COSTO,       rpa.getCosto());
-        int rows = db.update(TABLE_REPARACIONES, cv, RPA_ID + " = ?", new String[]{String.valueOf(rpa.getIdReparacion())});
+        int rows = db.update(TABLE_REPARACIONES, cv,
+                RPA_ID + " = ?", new String[]{String.valueOf(rpa.getIdReparacion())});
         return rows > 0;
     }
 
     public boolean eliminarReparacion(int idReparacion) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // Solo se puede eliminar si está en diagnóstico (borrado físico)
-        int rows = db.delete(TABLE_REPARACIONES, RPA_ID + " = ? AND " + RPA_ESTADO + " = ?",
+        int rows = db.delete(TABLE_REPARACIONES,
+                RPA_ID + " = ? AND " + RPA_ESTADO + " = ?",
                 new String[]{String.valueOf(idReparacion), ESTADO_DIAGNOSTICO});
         return rows > 0;
     }
 
     public List<ReparacionDTO> getReparaciones() {
         List<ReparacionDTO> lista = new ArrayList<>();
-        SQLiteDatabase db      = this.getReadableDatabase();
-        // JOIN con clientes y técnicos para traer nombres
-        String sql =
-                "SELECT r.*, " +
-                        "  c." + CLI_NOMBRE    + " AS nombre_cliente, c." + CLI_APELLIDO + " AS apellido_cliente, " +
-                        "  t." + TEC_NOMBRE    + " AS nombre_tecnico, t." + TEC_APELLIDO + " AS apellido_tecnico, " +
-                        "  v." + VEH_PLACA     + " AS placa_vehiculo, v." + VEH_MARCA    + " AS marca_vehiculo, v." + VEH_MODELO + " AS modelo_vehiculo " +
-                        "FROM " + TABLE_REPARACIONES + " r " +
-                        "LEFT JOIN " + TABLE_CLIENTES  + " c ON r." + RPA_ID_CLIENTE  + " = c." + CLI_ID  +
-                        " LEFT JOIN " + TABLE_TECNICOS  + " t ON r." + RPA_ID_TECNICO  + " = t." + TEC_ID  +
-                        " LEFT JOIN " + TABLE_VEHICULOS + " v ON r." + RPA_ID_VEHICULO + " = v." + VEH_ID  +
-                        " ORDER BY r." + RPA_ID + " DESC";
-        Cursor c = db.rawQuery(sql, null);
-        while (c.moveToNext()) lista.add(cursorToReparacion(c));
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(buildReparacionQuery(null), null);
+        while (c.moveToNext()) lista.add(cursorToReparacionDTO(c));
         c.close();
         return lista;
     }
 
     public List<ReparacionDTO> getReparacionesByTecnico(int idTecnico) {
         List<ReparacionDTO> lista = new ArrayList<>();
-        SQLiteDatabase db      = this.getReadableDatabase();
-        String sql =
-                "SELECT r.*, " +
-                        "  c." + CLI_NOMBRE + " AS nombre_cliente, c." + CLI_APELLIDO + " AS apellido_cliente, " +
-                        "  t." + TEC_NOMBRE + " AS nombre_tecnico, t." + TEC_APELLIDO + " AS apellido_tecnico, " +
-                        "  v." + VEH_PLACA  + " AS placa_vehiculo, v." + VEH_MARCA   + " AS marca_vehiculo, v." + VEH_MODELO + " AS modelo_vehiculo " +
-                        "FROM " + TABLE_REPARACIONES + " r " +
-                        "LEFT JOIN " + TABLE_CLIENTES  + " c ON r." + RPA_ID_CLIENTE  + " = c." + CLI_ID +
-                        " LEFT JOIN " + TABLE_TECNICOS  + " t ON r." + RPA_ID_TECNICO  + " = t." + TEC_ID +
-                        " LEFT JOIN " + TABLE_VEHICULOS + " v ON r." + RPA_ID_VEHICULO + " = v." + VEH_ID +
-                        " WHERE r." + RPA_ID_TECNICO + " = ?" +
-                        " ORDER BY r." + RPA_ID + " DESC";
-        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idTecnico)});
-        while (c.moveToNext()) lista.add(cursorToReparacion(c));
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(buildReparacionQuery("r." + RPA_ID_TECNICO + " = " + idTecnico), null);
+        while (c.moveToNext()) lista.add(cursorToReparacionDTO(c));
         c.close();
         return lista;
     }
 
     public ReparacionDTO getReparacionById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql =
-                "SELECT r.*, " +
-                        "  c." + CLI_NOMBRE + " AS nombre_cliente, c." + CLI_APELLIDO + " AS apellido_cliente, " +
-                        "  t." + TEC_NOMBRE + " AS nombre_tecnico, t." + TEC_APELLIDO + " AS apellido_tecnico, " +
-                        "  v." + VEH_PLACA  + " AS placa_vehiculo, v." + VEH_MARCA   + " AS marca_vehiculo, v." + VEH_MODELO + " AS modelo_vehiculo " +
-                        "FROM " + TABLE_REPARACIONES + " r " +
-                        "LEFT JOIN " + TABLE_CLIENTES  + " c ON r." + RPA_ID_CLIENTE  + " = c." + CLI_ID +
-                        " LEFT JOIN " + TABLE_TECNICOS  + " t ON r." + RPA_ID_TECNICO  + " = t." + TEC_ID +
-                        " LEFT JOIN " + TABLE_VEHICULOS + " v ON r." + RPA_ID_VEHICULO + " = v." + VEH_ID +
-                        " WHERE r." + RPA_ID + " = ?";
-        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(id)});
+        Cursor c = db.rawQuery(buildReparacionQuery("r." + RPA_ID + " = " + id), null);
         ReparacionDTO rpa = null;
-        if (c.moveToFirst()) rpa = cursorToReparacion(c);
+        if (c.moveToFirst()) rpa = cursorToReparacionDTO(c);
         c.close();
         return rpa;
     }
 
-    /**
-     * Actualiza solo el estado de la reparación
-     */
     public boolean actualizarEstadoReparacion(int idReparacion, String nuevoEstado) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv  = new ContentValues();
         cv.put(RPA_ESTADO, nuevoEstado);
-        int rows = db.update(TABLE_REPARACIONES, cv, RPA_ID + " = ?", new String[]{String.valueOf(idReparacion)});
+        int rows = db.update(TABLE_REPARACIONES, cv,
+                RPA_ID + " = ?", new String[]{String.valueOf(idReparacion)});
         return rows > 0;
     }
 
-    /**
-     * Obtiene total de repuestos + costo de mano de obra
-     */
     public double getTotalReparacion(int idReparacion) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalRepuestos = 0.0;
         double costoManoObra  = 0.0;
 
-        Cursor c1 = db.rawQuery("SELECT SUM(" + RR_SUBTOTAL + ") FROM " + TABLE_REPUESTOS_REPARACION + " WHERE " + RR_ID_REPARACION + " = ?", new String[]{String.valueOf(idReparacion)});
+        Cursor c1 = db.rawQuery(
+                "SELECT SUM(" + RR_SUBTOTAL + ") FROM " + TABLE_REPUESTOS_REPARACION
+                        + " WHERE " + RR_ID_REPARACION + " = ?",
+                new String[]{String.valueOf(idReparacion)});
         if (c1.moveToFirst()) totalRepuestos = c1.getDouble(0);
         c1.close();
 
-        Cursor c2 = db.rawQuery("SELECT " + RPA_COSTO + " FROM " + TABLE_REPARACIONES + " WHERE " + RPA_ID + " = ?", new String[]{String.valueOf(idReparacion)});
+        Cursor c2 = db.rawQuery(
+                "SELECT " + RPA_COSTO + " FROM " + TABLE_REPARACIONES
+                        + " WHERE " + RPA_ID + " = ?",
+                new String[]{String.valueOf(idReparacion)});
         if (c2.moveToFirst()) costoManoObra = c2.getDouble(0);
         c2.close();
 
         return totalRepuestos + costoManoObra;
     }
 
-    private ReparacionDTO cursorToReparacion(Cursor c) {
+    // Query base con JOIN reutilizable
+    private String buildReparacionQuery(String whereClause) {
+        String sql =
+                "SELECT r.*, "
+                        + "c." + CLI_NOMBRE   + " AS nombre_cliente, c." + CLI_APELLIDO + " AS apellido_cliente, "
+                        + "t." + TEC_NOMBRE   + " AS nombre_tecnico,  t." + TEC_APELLIDO + " AS apellido_tecnico, "
+                        + "v." + VEH_PLACA    + " AS placa_vehiculo,  v." + VEH_MARCA    + " AS marca_vehiculo, "
+                        + "v." + VEH_MODELO   + " AS modelo_vehiculo "
+                        + "FROM " + TABLE_REPARACIONES + " r "
+                        + "LEFT JOIN " + TABLE_CLIENTES  + " c ON r." + RPA_ID_CLIENTE  + " = c." + CLI_ID
+                        + " LEFT JOIN " + TABLE_TECNICOS  + " t ON r." + RPA_ID_TECNICO  + " = t." + TEC_ID
+                        + " LEFT JOIN " + TABLE_VEHICULOS + " v ON r." + RPA_ID_VEHICULO + " = v." + VEH_ID;
+        if (whereClause != null) sql += " WHERE " + whereClause;
+        sql += " ORDER BY r." + RPA_ID + " DESC";
+        return sql;
+    }
+
+    private ReparacionDTO cursorToReparacionDTO(Cursor c) {
         ReparacionDTO r = new ReparacionDTO();
         r.setIdReparacion( c.getInt(   c.getColumnIndexOrThrow(RPA_ID)));
         r.setIdCliente(    c.getInt(   c.getColumnIndexOrThrow(RPA_ID_CLIENTE)));
@@ -750,11 +733,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         r.setEstado(       c.getString(c.getColumnIndexOrThrow(RPA_ESTADO)));
         r.setDescripcion(  c.getString(c.getColumnIndexOrThrow(RPA_DESCRIPCION)));
         r.setCosto(        c.getDouble(c.getColumnIndexOrThrow(RPA_COSTO)));
-        // Campos JOIN (pueden ser null si no hay join)
-        try { r.setNombreCliente( c.getString(c.getColumnIndexOrThrow("nombre_cliente"))  + " " + c.getString(c.getColumnIndexOrThrow("apellido_cliente"))); } catch (Exception ignored) {}
-        try { r.setNombreTecnico( c.getString(c.getColumnIndexOrThrow("nombre_tecnico"))  + " " + c.getString(c.getColumnIndexOrThrow("apellido_tecnico"))); } catch (Exception ignored) {}
-        try { r.setPlacaVehiculo( c.getString(c.getColumnIndexOrThrow("placa_vehiculo"))); }    catch (Exception ignored) {}
-        try { r.setInfoVehiculo(  c.getString(c.getColumnIndexOrThrow("marca_vehiculo"))  + " " + c.getString(c.getColumnIndexOrThrow("modelo_vehiculo"))); } catch (Exception ignored) {}
+        try { r.setNombreCliente(c.getString(c.getColumnIndexOrThrow("nombre_cliente"))
+                + " " + c.getString(c.getColumnIndexOrThrow("apellido_cliente"))); } catch (Exception ignored) {}
+        try { r.setNombreTecnico(c.getString(c.getColumnIndexOrThrow("nombre_tecnico"))
+                + " " + c.getString(c.getColumnIndexOrThrow("apellido_tecnico"))); } catch (Exception ignored) {}
+        try { r.setPlacaVehiculo(c.getString(c.getColumnIndexOrThrow("placa_vehiculo"))); } catch (Exception ignored) {}
+        try { r.setInfoVehiculo( c.getString(c.getColumnIndexOrThrow("marca_vehiculo"))
+                + " " + c.getString(c.getColumnIndexOrThrow("modelo_vehiculo"))); }  catch (Exception ignored) {}
         return r;
     }
 
