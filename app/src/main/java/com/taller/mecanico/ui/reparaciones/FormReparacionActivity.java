@@ -28,7 +28,6 @@ import java.util.List;
 public class FormReparacionActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID_REPARACION = "id_reparacion";
-
     private Spinner           spinnerCliente, spinnerTecnico, spinnerVehiculo, spinnerEstado;
     private View              tvLabelEstado;
     private TextInputLayout   tilDescripcion, tilCosto, tilFechaIngreso;
@@ -42,6 +41,7 @@ public class FormReparacionActivity extends AppCompatActivity {
 
     private int     idReparacion = 0;
     private boolean modoEdicion  = false;
+    private int idVehiculoPendiente = 0;
 
     private static final String[] ESTADOS_KEYS = {
             "EN_DIAGNOSTICO", "EN_REPARACION", "ESPERANDO_REPUESTOS", "LISTO_ENTREGA", "ENTREGADO"
@@ -145,6 +145,16 @@ public class FormReparacionActivity extends AppCompatActivity {
         ArrayAdapter<String> adVeh = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresVeh);
         adVeh.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerVehiculo.setAdapter(adVeh);
+        //cargar vehiculo en modo edición si lo hay
+        if (idVehiculoPendiente > 0) {
+            for (int i = 0; i < vehiculos.size(); i++) {
+                if (vehiculos.get(i).getIdVehiculo() == idVehiculoPendiente) {
+                    spinnerVehiculo.setSelection(i + 1); // +1 por "Sin vehículo" en pos 0
+                    break;
+                }
+            }
+            idVehiculoPendiente = 0;
+        }
     }
 
     private void mostrarDatePicker() {
@@ -162,6 +172,7 @@ public class FormReparacionActivity extends AppCompatActivity {
         etCosto.setText(String.valueOf(r.getCosto()));
         etFechaIngreso.setText(r.getFechaIngreso());
 
+        idVehiculoPendiente = r.getIdVehiculo();
         // Seleccionar cliente
         for (int i = 0; i < clientes.size(); i++) {
             if (clientes.get(i).getIdCliente() == r.getIdCliente()) {
