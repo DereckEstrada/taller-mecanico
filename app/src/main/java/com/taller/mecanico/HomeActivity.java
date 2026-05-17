@@ -250,8 +250,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_consulta_vehiculo) {
-            startActivity(new Intent(this, ConsultaVehiculoActivity.class));
+        if (id == R.id.action_inicio) {
+            mostrarFragmento(obtenerFragmento(TAG_DASHBOARD), TAG_DASHBOARD);
             return true;
         } else if (id == R.id.action_acerca_de) {
             mostrarDialogoAcercaDe();

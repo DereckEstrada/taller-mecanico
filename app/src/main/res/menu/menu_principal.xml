@@ -8,16 +8,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_registros"
-        android:title="Registros"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_consulta_vehiculo"
-        android:title="Consulta por Placa"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_acerca_de"
         android:title="Acerca de"
         app:showAsAction="never" />
